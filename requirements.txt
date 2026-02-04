@@ -1,0 +1,7 @@
+cat > requirements.txt << 'EOF'
+flask
+yfinance
+pandas
+python-dotenv
+requests
+EOF

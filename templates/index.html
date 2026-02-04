@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Valuation Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Asset Valuation Dashboard</h1>
+            <p class="subtitle">Analyze stocks with rational & adaptive expectations</p>
+        </header>
+
+        <div class="input-section">
+            <div class="ticker-input">
+                <input type="text" id="tickerInput" placeholder="Enter ticker symbol (e.g., AAPL, TSLA, NVDA)" />
+                <button id="analyzeBtn">Analyze</button>
+            </div>
+
+            <div class="model-slider">
+                <label for="modelSlider">
+                    Model Balance: 
+                    <span id="sliderLabel">50% Rational / 50% Adaptive</span>
+                </label>
+                <div class="slider-container">
+                    <span class="slider-end">Adaptive</span>
+                    <input type="range" id="modelSlider" min="0" max="100" value="50" />
+                    <span class="slider-end">Rational</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="loadingSpinner" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Analyzing asset...</p>
+        </div>
+
+        <div id="errorMessage" class="error-message hidden"></div>
+
+        <div id="resultsSection" class="results-section hidden">
+            <div class="stock-header">
+                <div>
+                    <h2 id="companyName"></h2>
+                    <p id="tickerSymbol"></p>
+                </div>
+                <div class="current-price">
+                    <span class="price-label">Current Price</span>
+                    <span id="currentPrice" class="price-value"></span>
+                </div>
+            </div>
+
+            <div class="recommendation-card" id="recommendationCard">
+                <h3>Recommendation</h3>
+                <div class="recommendation-badge" id="recommendationBadge"></div>
+                <div class="score-display">
+                    <span>Combined Score: <strong id="combinedScore"></strong></span>
+                </div>
+            </div>
+
+            <div class="scores-grid">
+                <div class="score-card rational">
+                    <h4>📈 Rational Expectations</h4>
+                    <div class="score-value" id="rationalScore"></div>
+                    <div class="weight-badge" id="rationalWeight"></div>
+                    <ul id="rationalReasons" class="reasons-list"></ul>
+                </div>
+
+                <div class="score-card adaptive">
+                    <h4>📉 Adaptive Expectations</h4>
+                    <div class="score-value" id="adaptiveScore"></div>
+                    <div class="weight-badge" id="adaptiveWeight"></div>
+                    <ul id="adaptiveReasons" class="reasons-list"></ul>
+                </div>
+            </div>
+
+            <div class="fundamentals-card">
+                <h3>Key Fundamentals</h3>
+                <div class="fundamentals-grid">
+                    <div class="fundamental-item">
+                        <span class="fundamental-label">P/E Ratio</span>
+                        <span id="peRatio" class="fundamental-value"></span>
+                    </div>
+                    <div class="fundamental-item">
+                        <span class="fundamental-label">Forward P/E</span>
+                        <span id="forwardPE" class="fundamental-value"></span>
+                    </div>
+                    <div class="fundamental-item">
+                        <span class="fundamental-label">PEG Ratio</span>
+                        <span id="pegRatio" class="fundamental-value"></span>
+                    </div>
+                    <div class="fundamental-item">
+                        <span class="fundamental-label">Price/Book</span>
+                        <span id="priceToBook" class="fundamental-value"></span>
+                    </div>
+                    <div class="fundamental-item">
+                        <span class="fundamental-label">Market Cap</span>
+                        <span id="marketCap" class="fundamental-value"></span>
+                    </div>
+                    <div class="fundamental-item">
+                        <span class="fundamental-label">Sector</span>
+                        <span id="sector" class="fundamental-value"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
